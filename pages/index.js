@@ -61,7 +61,10 @@ export default function Home() {
         margin: '10px 0', 
         background: message.includes('✅') ? '#d4edda' : '#f8d7da',
         border: `1px solid ${message.includes('✅') ? '#c3e6cb' : '#f5c6cb'}`,
-        borderRadius: 5
+        borderRadius: 5,
+        color: message.includes('✅') ? '#155724' : '#721c24', // AGGIUNGI QUESTA RIGA
+        fontWeight: 'bold', // AGGIUNGI QUESTA RIGA
+        textAlign: 'center' // AGGIUNGI QUESTA RIGA
       }}>{message}</div>}
 
       <form onSubmit={handleSubmit} style={{ backgroundColor: '#f9f9f9', padding: 20, borderRadius: 8 }}>
