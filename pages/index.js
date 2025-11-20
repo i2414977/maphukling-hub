@@ -191,7 +191,7 @@ export default function Home() {
           <legend style={{ fontWeight: 'bold', color: '#333', fontSize: '16px' }}>Dichiarazioni e Consensi</legend>
           
           <div style={{ marginBottom: 20, lineHeight: '1.6' }}>
-            <p><strong>Avendo preso visione dello statuto dell'Associazione</strong></p>
+            <p>Avendo preso visione dello statuto dell'Associazione</p>
             
             <div style={{ textAlign: 'center', margin: '15px 0' }}>
               <strong>Chiede</strong>
@@ -199,7 +199,7 @@ export default function Home() {
             
             <p>di poter aderire all'associazione "MACHIG PHUKPA CHOKHOR LING", in qualità di Socio Ordinario.</p>
             
-            <p>A tal fine effettua il versamento della quota associativa annuale pari a 15 euro.</p>
+            <p>A tal fine effettua il versamento della quota associativa annuale pari a <strong>15 euro.</strong></p>
             
             <p>Dichiara di aver letto lo statuto e di attenersi ad eventuali regolamenti dell'Associazione oltre che alle deliberazioni adottate dagli organi sociali.</p>
           </div>
