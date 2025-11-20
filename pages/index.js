@@ -197,7 +197,7 @@ export default function Home() {
               <strong>Chiede</strong>
             </div>
             
-            <p>di poter aderire all'associazione "MACHIG PHUKPA CHOKHOR LING", in qualità di Socio Ordinario.</p>
+            <p>di poter aderire all'associazione <strong>"MACHIG PHUKPA CHOKHOR LING"</strong>, in qualità di Socio Ordinario.</p>
             
             <p>A tal fine effettua il versamento della quota associativa annuale pari a <strong>15 euro.</strong></p>
             
@@ -325,7 +325,7 @@ export default function Home() {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span>Il/La sottoscritto/a</span>
+              <span>Il/La sottoscritto/a, ricevuta l'informativa ai sensi dell'art. 13 del D.lgs. 196/2003, dà il consenso al trattamento dei propri dati personali nella misura necessaria al raggiungimento degli scopi statutari e con le modalità indicate nell'informativa medesima.</span>
               <input 
                 type="text" 
                 name="sottoscritto" 
@@ -335,7 +335,6 @@ export default function Home() {
                 required 
                 style={{ flex: 1, padding: 8, border: '1px solid #ccc', borderRadius: 4 }} 
               />
-              <span>, ricevuta l'informativa ai sensi dell'art. 13 del D.lgs. 196/2003, dà il consenso al trattamento dei propri dati personali nella misura necessaria al raggiungimento degli scopi statutari e con le modalità indicate nell'informativa medesima.</span>
             </div>
           </div>
         </fieldset>
