@@ -2,10 +2,19 @@ import { useState } from 'react';
 
 export default function Home() {
   const [formData, setFormData] = useState({
+    // DATI ANAGRAFICI
     nome: '', cognome: '', luogoNascita: '', dataNascita: '', provinciaNascita: '',
     codiceFiscale: '', residenza: '', provinciaResidenza: '', indirizzo: '', cap: '',
     telefono: '', cellulare: '', email: '', documentoIdentita: '', numeroDocumento: '',
-    consensoFoto: false, consensoTrattamentoDati: false
+    
+    // NUOVI CAMPI PER CONSENSI
+    sottoscritto: '', // per "Il/La sottoscritto/a"
+    autorizzaFoto: false,
+    nonAutorizzaFoto: false,
+    impegnoNoUsoCommerciale: false,
+    accettaSottoposizione: false,
+    accettaDirittiDoveri: false,
+    consensoTrattamentoDati: false
   });
 
   const [loading, setLoading] = useState(false);
@@ -27,11 +36,14 @@ export default function Home() {
       
       if (data.success) {
         setMessage('✅ Richiesta inviata con successo!');
+        // Reset form
         setFormData({
           nome: '', cognome: '', luogoNascita: '', dataNascita: '', provinciaNascita: '',
           codiceFiscale: '', residenza: '', provinciaResidenza: '', indirizzo: '', cap: '',
           telefono: '', cellulare: '', email: '', documentoIdentita: '', numeroDocumento: '',
-          consensoFoto: false, consensoTrattamentoDati: false
+          sottoscritto: '',
+          autorizzaFoto: false, nonAutorizzaFoto: false, impegnoNoUsoCommerciale: false,
+          accettaSottoposizione: false, accettaDirittiDoveri: false, consensoTrattamentoDati: false
         });
       } else {
         setMessage(`❌ ${data.message}`);
@@ -52,7 +64,7 @@ export default function Home() {
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: '0 auto', padding: 20, fontFamily: 'Arial, sans-serif' }}>
+    <div style={{ maxWidth: 800, margin: '0 auto', padding: 20, fontFamily: 'Arial, sans-serif' }}>
       <h1 style={{ textAlign: 'center', color: '#333' }}>MODULO DI RICHIESTA ADESIONE</h1>
       <h2 style={{ textAlign: 'center', color: '#666', fontSize: '1.2em' }}>ASSOCIAZIONE "MACHIG PHUKPA CHOKHOR LING"</h2>
       
@@ -62,12 +74,13 @@ export default function Home() {
         background: message.includes('✅') ? '#d4edda' : '#f8d7da',
         border: `1px solid ${message.includes('✅') ? '#c3e6cb' : '#f5c6cb'}`,
         borderRadius: 5,
-        color: message.includes('✅') ? '#155724' : '#721c24', // AGGIUNGI QUESTA RIGA
-        fontWeight: 'bold', // AGGIUNGI QUESTA RIGA
-        textAlign: 'center' // AGGIUNGI QUESTA RIGA
+        color: message.includes('✅') ? '#155724' : '#721c24',
+        fontWeight: 'bold',
+        textAlign: 'center'
       }}>{message}</div>}
 
       <form onSubmit={handleSubmit} style={{ backgroundColor: '#f9f9f9', padding: 20, borderRadius: 8 }}>
+
         {/* DATI ANAGRAFICI */}
         <fieldset style={{ border: '1px solid #ddd', padding: 15, marginBottom: 20 }}>
           <legend style={{ fontWeight: 'bold', color: '#333' }}>Dati Anagrafici</legend>
@@ -173,24 +186,157 @@ export default function Home() {
           </div>
         </fieldset>
 
-        {/* CONSENSI */}
-        <fieldset style={{ border: '1px solid #ddd', padding: 15, marginBottom: 20 }}>
-          <legend style={{ fontWeight: 'bold', color: '#333' }}>Consensi</legend>
+        {/* DICHIARAZIONI E CONSENSI */}
+        <fieldset style={{ border: '1px solid #ddd', padding: 20, marginBottom: 20 }}>
+          <legend style={{ fontWeight: 'bold', color: '#333', fontSize: '16px' }}>Dichiarazioni e Consensi</legend>
           
-          <div style={{ marginBottom: 15 }}>
-            <label style={{ display: 'block', marginBottom: 8 }}>
-              <input type="checkbox" name="consensoFoto" checked={formData.consensoFoto} onChange={handleChange} 
-                style={{ marginRight: 8 }} />
-              Autorizzo l'Associazione all'utilizzo di foto scattate e/o riprese video effettuate durante eventi e manifestazioni
-            </label>
+          <div style={{ marginBottom: 20, lineHeight: '1.6' }}>
+            <p><strong>Avendo preso visione dello statuto dell'Associazione</strong></p>
+            
+            <div style={{ textAlign: 'center', margin: '15px 0' }}>
+              <strong>Chiede</strong>
+            </div>
+            
+            <p>di poter aderire all'associazione "MACHIG PHUKPA CHOKHOR LING", in qualità di Socio Ordinario.</p>
+            
+            <p>A tal fine effettua il versamento della quota associativa annuale pari a 15 euro.</p>
+            
+            <p>Dichiara di aver letto lo statuto e di attenersi ad eventuali regolamenti dell'Associazione oltre che alle deliberazioni adottate dagli organi sociali.</p>
           </div>
 
-          <div style={{ marginBottom: 10 }}>
-            <label style={{ display: 'block', marginBottom: 8 }}>
-              <input type="checkbox" name="consensoTrattamentoDati" checked={formData.consensoTrattamentoDati} onChange={handleChange} required 
-                style={{ marginRight: 8 }} />
-              Consenso al trattamento dei dati personali (obbligatorio) *
-            </label>
+          <div style={{ marginBottom: 20 }}>
+            <p><strong>Dichiara altresì:</strong></p>
+            
+            <p>a) di condividere le finalità dello Statuto e di voler contribuire, secondo le proprie capacità e disponibilità di tempo e mezzi, alla loro realizzazione;</p>
+            <p>b) che verserà la quota associativa annuale, secondo le modalità stabilite dal Consiglio Direttivo;</p>
+            
+            <div style={{ margin: '15px 0' }}>
+              <p>c) di 
+                <label style={{ display: 'inline-flex', alignItems: 'center', margin: '0 10px', cursor: 'pointer' }}>
+                  <input 
+                    type="checkbox" 
+                    name="autorizzaFoto" 
+                    checked={formData.autorizzaFoto} 
+                    onChange={handleChange} 
+                    style={{ marginRight: 5 }} 
+                  />
+                  autorizzare
+                </label>
+                o
+                <label style={{ display: 'inline-flex', alignItems: 'center', margin: '0 10px', cursor: 'pointer' }}>
+                  <input 
+                    type="checkbox" 
+                    name="nonAutorizzaFoto" 
+                    checked={formData.nonAutorizzaFoto} 
+                    onChange={handleChange} 
+                    style={{ marginRight: 5 }} 
+                  />
+                  non autorizzare
+                </label>
+                l'Associazione all'utilizzo di foto scattate e/o riprese video effettuate durante eventi e manifestazioni organizzate dall'Associazione stessa, limitatamente a: pubblicazioni sul sito dell'Associazione, stampa materiale pubblicitario a cura dell'Associazione, pubblicazione sulla stampa periodica locale;
+              </p>
+            </div>
+          </div>
+
+          <div style={{ marginBottom: 20 }}>
+            <p><strong>inoltre:</strong></p>
+            
+            <div style={{ marginBottom: 15 }}>
+              <label style={{ display: 'flex', alignItems: 'flex-start', cursor: 'pointer' }}>
+                <input 
+                  type="checkbox" 
+                  name="impegnoNoUsoCommerciale" 
+                  checked={formData.impegnoNoUsoCommerciale} 
+                  onChange={handleChange} 
+                  style={{ marginRight: 10, marginTop: 3 }} 
+                />
+                <span>a) si impegna a non utilizzare il nome dell'Associazione "MACHIG PHUKPA CHOKHOR LING" e il materiale da essa prodotto ai fini associativi, per attività di carattere commerciale, imprenditoriale o, in ogni caso, aventi scopo di lucro;</span>
+              </label>
+            </div>
+
+            <div style={{ marginBottom: 15 }}>
+              <label style={{ display: 'flex', alignItems: 'flex-start', cursor: 'pointer' }}>
+                <input 
+                  type="checkbox" 
+                  name="accettaSottoposizione" 
+                  checked={formData.accettaSottoposizione} 
+                  onChange={handleChange} 
+                  style={{ marginRight: 10, marginTop: 3 }} 
+                />
+                <span>b) prende atto che l'adesione come Socio sostenitore è subordinata all'accettazione, da parte del Consiglio Direttivo, come previsto dall'art. 3 dello Statuto;</span>
+              </label>
+            </div>
+
+            <div style={{ marginBottom: 15 }}>
+              <label style={{ display: 'flex', alignItems: 'flex-start', cursor: 'pointer' }}>
+                <input 
+                  type="checkbox" 
+                  name="accettaDirittiDoveri" 
+                  checked={formData.accettaDirittiDoveri} 
+                  onChange={handleChange} 
+                  style={{ marginRight: 10, marginTop: 3 }} 
+                />
+                <span>c) in qualità di Socio, acquisirà i diritti e i doveri previsti dagli art. 4 e 5 dello Statuto.</span>
+              </label>
+            </div>
+          </div>
+
+          <div style={{ marginBottom: 20, padding: 15, backgroundColor: '#f8f9fa', borderRadius: 6 }}>
+            <div style={{ marginBottom: 15 }}>
+              <label style={{ display: 'flex', alignItems: 'flex-start', cursor: 'pointer' }}>
+                <input 
+                  type="checkbox" 
+                  name="consensoTrattamentoDati" 
+                  checked={formData.consensoTrattamentoDati} 
+                  onChange={handleChange} 
+                  required 
+                  style={{ marginRight: 10, marginTop: 3 }} 
+                />
+                <span>
+                  <strong>Consenso al trattamento dei dati personali</strong> ai sensi dell'art. 23 D.lgs. 196 del 30/6/2003. 
+                  I dati forniti, da chi presenta richiesta di adesione, vengono registrati nel libro soci e/o in appositi registri, 
+                  predisposti su supporto cartaceo e/o elettronico dall'Associazione "MACHIG PHUKPA CHOKHOR LING", con sede in 
+                  Barberino Tavarnelle, che ne è responsabile per il trattamento.
+                </span>
+              </label>
+            </div>
+
+            <div style={{ marginBottom: 15 }}>
+              <p style={{ fontSize: '14px', lineHeight: '1.5', margin: '10px 0' }}>
+                Per dati si intendono quelli forniti durante la registrazione quale associato e le successive modifiche e/o integrazioni 
+                da parte dell'associato stesso. In conformità con l'art. 13 del D.lgs 30 giugno 2003, recante il Codice in materia di 
+                protezione dei dati personali, si desidera informare il socio che i dati personali volontariamente forniti per aderire 
+                all'Associazione suddetta, saranno trattati, da parte dell'Associazione stessa, adottando tutte le misure idonee a garantire 
+                la sicurezza e la riservatezza nel rispetto della normativa sopra richiamata.
+              </p>
+              
+              <p style={{ fontSize: '14px', lineHeight: '1.5', margin: '10px 0' }}>
+                Il consenso al trattamento dei dati personali viene fornito con la richiesta di adesione; in assenza del consenso non è 
+                possibile aderire all'Associazione, né fruire dei suoi servizi. L'indicazione di nome, data di nascita e recapiti 
+                (indirizzo, telefono e mail) è necessaria per la gestione del rapporto associativo e per l'adempimento degli obblighi di legge. 
+                Il conferimento degli altri dati è facoltativo. L'interessato può, in qualsiasi momento, decidere quali dati (non obbligatori) 
+                lasciare nella disponibilità dell'Associazione e quali informazioni ricevere.
+              </p>
+              
+              <p style={{ fontSize: '14px', lineHeight: '1.5', margin: '10px 0' }}>
+                Titolare del trattamento è l'Associazione "MACHIG PHUKPA CHOKHOR LING", con sede a Barberino Tavarnelle. 
+                Responsabile del trattamento è il Presidente Palmieri Massimiliano.
+              </p>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span>Il/La sottoscritto/a</span>
+              <input 
+                type="text" 
+                name="sottoscritto" 
+                placeholder="Nome e Cognome *" 
+                value={formData.sottoscritto} 
+                onChange={handleChange} 
+                required 
+                style={{ flex: 1, padding: 8, border: '1px solid #ccc', borderRadius: 4 }} 
+              />
+              <span>, ricevuta l'informativa ai sensi dell'art. 13 del D.lgs. 196/2003, dà il consenso al trattamento dei propri dati personali nella misura necessaria al raggiungimento degli scopi statutari e con le modalità indicate nell'informativa medesima.</span>
+            </div>
           </div>
         </fieldset>
 

@@ -10,13 +10,37 @@ export default async function handler(req, res) {
     await dbConnect();
 
     const {
+      // DATI ANAGRAFICI ESISTENTI
       nome, cognome, luogoNascita, dataNascita, provinciaNascita,
       codiceFiscale, residenza, provinciaResidenza, indirizzo, cap,
       telefono, cellulare, email, documentoIdentita, numeroDocumento,
-      consensoFoto, consensoTrattamentoDati
+      
+      // NUOVI CAMPI PER CONSENSI
+      sottoscritto,
+      autorizzaFoto,
+      nonAutorizzaFoto,
+      impegnoNoUsoCommerciale,
+      accettaSottoposizione,
+      accettaDirittiDoveri,
+      consensoTrattamentoDati
     } = req.body;
 
-    // Verifica email esistente
+    // Verifica campi obbligatori
+    if (!consensoTrattamentoDati) {
+      return res.status(400).json({
+        success: false,
+        message: 'Il consenso al trattamento dati è obbligatorio'
+      });
+    }
+
+    if (!sottoscritto) {
+      return res.status(400).json({
+        success: false,
+        message: 'Il campo "sottoscritto" è obbligatorio'
+      });
+    }
+
+    // Verifica se email già registrata
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({
@@ -25,8 +49,18 @@ export default async function handler(req, res) {
       });
     }
 
+    // Verifica se codice fiscale già registrato
+    const existingCF = await User.findOne({ codiceFiscale });
+    if (existingCF) {
+      return res.status(400).json({
+        success: false,
+        message: 'Codice Fiscale già registrato'
+      });
+    }
+
     // Crea nuovo socio
     const newUser = new User({
+      // DATI ANAGRAFICI
       nome,
       cognome,
       luogoNascita,
@@ -42,15 +76,28 @@ export default async function handler(req, res) {
       email,
       documentoIdentita,
       numeroDocumento,
-      consensoFoto,
-      consensoTrattamentoDati
+      
+      // NUOVI CAMPI CONSENSI
+      sottoscritto,
+      autorizzaFoto: autorizzaFoto || false,
+      nonAutorizzaFoto: nonAutorizzaFoto || false,
+      impegnoNoUsoCommerciale: impegnoNoUsoCommerciale || false,
+      accettaSottoposizione: accettaSottoposizione || false,
+      accettaDirittiDoveri: accettaDirittiDoveri || false,
+      consensoTrattamentoDati,
+
+      // META-DATI
+      dataRichiesta: new Date(),
+      stato: 'in_attesa',
+      tipoSocio: 'ordinario'
     });
 
     await newUser.save();
 
     res.status(201).json({
       success: true,
-      message: 'Richiesta di adesione inviata con successo!'
+      message: 'Richiesta di adesione inviata con successo!',
+      userId: newUser._id
     });
 
   } catch (error) {

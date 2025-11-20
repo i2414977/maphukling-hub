@@ -17,6 +17,14 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   documentoIdentita: { type: String, required: true },
   numeroDocumento: { type: String, required: true },
+    // NUOVI CAMPI PER CONSENSI
+  sottoscritto: { type: String, required: true }, // "Il/La sottoscritto/a"
+  autorizzaFoto: { type: Boolean, default: false },
+  nonAutorizzaFoto: { type: Boolean, default: false },
+  impegnoNoUsoCommerciale: { type: Boolean, default: false },
+  accettaSottoposizione: { type: Boolean, default: false },
+  accettaDirittiDoveri: { type: Boolean, default: false },
+  consensoTrattamentoDati: { type: Boolean, required: true },
   
   // CONSENSI
   consensoFoto: { type: Boolean, default: false },
