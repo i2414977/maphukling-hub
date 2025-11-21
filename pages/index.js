@@ -325,7 +325,8 @@ export default function Home() {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span>Il/La sottoscritto/a, ricevuta l'informativa ai sensi dell'art. 13 del D.lgs. 196/2003, dà il consenso al trattamento dei propri dati personali nella misura necessaria al raggiungimento degli scopi statutari e con le modalità indicate nell'informativa medesima.</span></div>
+              <span>Il/La sottoscritto/a, ricevuta l'informativa ai sensi dell'art. 13 del D.lgs. 196/2003, dà il consenso al trattamento dei propri dati personali nella misura necessaria al raggiungimento degli scopi statutari e con le modalità indicate nell'informativa medesima.</span>
+            </div>
              <div>     
               <input 
                 type="text" 
