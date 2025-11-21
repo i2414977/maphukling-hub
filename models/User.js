@@ -35,7 +35,9 @@ const userSchema = new mongoose.Schema({
   
   // DATI ASSOCIATIVI
   dataRichiesta: { type: Date, default: Date.now },
-  stato: { type: String, default: 'in_attesa' }
+  stato: { type: String, default: 'in_attesa' },
+  numerotessera: { type: String, default: 'non assegnato' },
+  pagamentotessera: { type: String, default: 'no' } 
 }, {
   timestamps: true
 });
