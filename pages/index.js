@@ -324,7 +324,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '15px' }}>
               <span>Il/La sottoscritto/a, ricevuta l'informativa ai sensi dell'art. 13 del D.lgs. 196/2003, dà il consenso al trattamento dei propri dati personali nella misura necessaria al raggiungimento degli scopi statutari e con le modalità indicate nell'informativa medesima.</span>
             </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 10 }}>
