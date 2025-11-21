@@ -340,7 +340,6 @@ export default function Home() {
               />
             </div>
            </div>
-          <br>
           </div>
         </fieldset>
 
