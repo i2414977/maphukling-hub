@@ -17,8 +17,7 @@ export default async function handler(req, res) {
       
       // NUOVI CAMPI PER CONSENSI
       sottoscritto,
-      autorizzaFoto,
-      nonAutorizzaFoto,
+      autorizzazioneFoto,  // ← UN SOLO CAMPO PER FOTO
       impegnoNoUsoCommerciale,
       accettaSottoposizione,
       accettaDirittiDoveri,
@@ -79,8 +78,7 @@ export default async function handler(req, res) {
       
       // NUOVI CAMPI CONSENSI
       sottoscritto,
-      autorizzaFoto: autorizzaFoto || false,
-      nonAutorizzaFoto: nonAutorizzaFoto || false,
+      autorizzazioneFoto: autorizzazioneFoto || 'non_specificato',
       impegnoNoUsoCommerciale: impegnoNoUsoCommerciale || false,
       accettaSottoposizione: accettaSottoposizione || false,
       accettaDirittiDoveri: accettaDirittiDoveri || false,
