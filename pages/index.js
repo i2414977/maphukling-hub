@@ -211,28 +211,30 @@ export default function Home() {
             <p>b) che verserà la quota associativa annuale, secondo le modalità stabilite dal Consiglio Direttivo;</p>
             
             <div style={{ margin: '15px 0' }}>
-              <p>c) di 
-                <label style={{ display: 'inline-flex', alignItems: 'center', margin: '0 10px', cursor: 'pointer' }}>
-                  <input 
-                    type="checkbox" 
-                    name="autorizzaFoto" 
-                    checked={formData.autorizzaFoto} 
-                    onChange={handleChange} 
-                    style={{ marginRight: 5 }} 
-                  />
-                  autorizzare
-                </label>
-                o
-                <label style={{ display: 'inline-flex', alignItems: 'center', margin: '0 10px', cursor: 'pointer' }}>
-                  <input 
-                    type="checkbox" 
-                    name="nonAutorizzaFoto" 
-                    checked={formData.nonAutorizzaFoto} 
-                    onChange={handleChange} 
-                    style={{ marginRight: 5 }} 
-                  />
-                  non autorizzare
-                </label>
+  <p>c) di 
+    <label style={{ display: 'inline-flex', alignItems: 'center', margin: '0 10px', cursor: 'pointer' }}>
+      <input 
+        type="radio" 
+        name="autorizzazioneFoto" 
+        value="autorizza"
+        checked={formData.autorizzazioneFoto === 'autorizza'} 
+        onChange={handleChange} 
+        style={{ marginRight: 5 }} 
+      />
+      autorizzare
+    </label>
+    o
+    <label style={{ display: 'inline-flex', alignItems: 'center', margin: '0 10px', cursor: 'pointer' }}>
+      <input 
+        type="radio" 
+        name="autorizzazioneFoto" 
+        value="non_autorizza"
+        checked={formData.autorizzazioneFoto === 'non_autorizza'} 
+        onChange={handleChange} 
+        style={{ marginRight: 5 }} 
+      />
+      non autorizzare
+    </label>
                 l'Associazione all'utilizzo di foto scattate e/o riprese video effettuate durante eventi e manifestazioni organizzate dall'Associazione stessa, limitatamente a: pubblicazioni sul sito dell'Associazione, stampa materiale pubblicitario a cura dell'Associazione, pubblicazione sulla stampa periodica locale;
               </p>
             </div>
