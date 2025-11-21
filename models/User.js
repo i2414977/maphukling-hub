@@ -19,8 +19,11 @@ const userSchema = new mongoose.Schema({
   numeroDocumento: { type: String, required: true },
     // NUOVI CAMPI PER CONSENSI
   sottoscritto: { type: String, required: true }, // "Il/La sottoscritto/a"
-  autorizzaFoto: { type: Boolean, default: false },
-  nonAutorizzaFoto: { type: Boolean, default: false },
+  autorizzazioneFoto: { 
+    type: String, 
+    enum: ['autorizza', 'non_autorizza', 'non_specificato'],
+    default: 'non_specificato'
+  },
   impegnoNoUsoCommerciale: { type: Boolean, default: false },
   accettaSottoposizione: { type: Boolean, default: false },
   accettaDirittiDoveri: { type: Boolean, default: false },
