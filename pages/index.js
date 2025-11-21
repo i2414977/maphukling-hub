@@ -327,6 +327,7 @@ export default function Home() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <span>Il/La sottoscritto/a, ricevuta l'informativa ai sensi dell'art. 13 del D.lgs. 196/2003, dà il consenso al trattamento dei propri dati personali nella misura necessaria al raggiungimento degli scopi statutari e con le modalità indicate nell'informativa medesima.</span>
             </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 10 }}>
              <div>     
               <input 
                 type="text" 
@@ -338,6 +339,7 @@ export default function Home() {
                 style={{ flex: 1, padding: 8, border: '1px solid #ccc', borderRadius: 4 }} 
               />
             </div>
+           </div>
           </div>
         </fieldset>
 
