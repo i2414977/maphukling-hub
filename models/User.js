@@ -1,13 +1,12 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
-  // DATI ANAGRAFICI
   nome: { type: String, required: true },
   cognome: { type: String, required: true },
   luogoNascita: { type: String, required: true },
   dataNascita: { type: Date, required: true },
   provinciaNascita: { type: String, required: true },
-  codiceFiscale: { type: String, required: true },
+  codiceFiscale: { type: String, required: true, unique: true },
   residenza: { type: String, required: true },
   provinciaResidenza: { type: String, required: true },
   indirizzo: { type: String, required: true },
@@ -17,8 +16,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   documentoIdentita: { type: String, required: true },
   numeroDocumento: { type: String, required: true },
-    // NUOVI CAMPI PER CONSENSI
-  sottoscritto: { type: String, required: true }, // "Il/La sottoscritto/a"
+  sottoscritto: { type: String, required: true },
   autorizzazioneFoto: { 
     type: String, 
     enum: ['autorizza', 'non_autorizza', 'non_specificato'],
@@ -28,18 +26,23 @@ const userSchema = new mongoose.Schema({
   accettaSottoposizione: { type: Boolean, default: false },
   accettaDirittiDoveri: { type: Boolean, default: false },
   consensoTrattamentoDati: { type: Boolean, required: true },
-  
-  // CONSENSI
-  consensoFoto: { type: Boolean, default: false },
-  consensoTrattamentoDati: { type: Boolean, required: true },
-  
-  // DATI ASSOCIATIVI
+  numeroTessera: { 
+    type: Number,
+    unique: true,
+    sparse: true
+  },
+  dataApprovazione: Date,
+  dataEmissioneTessera: Date,
+  statoTessera: {
+    type: String,
+    enum: ['da_emettere', 'emessa', 'inviata', 'scaduta'],
+    default: 'da_emettere'
+  },
   dataRichiesta: { type: Date, default: Date.now },
   stato: { type: String, default: 'in_attesa' },
-  numerotessera: { type: String, default: 'non assegnato' },
-  pagamentotessera: { type: String, default: 'no' } 
+  tipoSocio: { type: String, default: 'ordinario' }
 }, {
   timestamps: true
 });
 
-export default mongoose.models.User || mongoose.model('User', userSchema);
+export default mongoose.models.User || mongoose.model('User', userSchema, 'soci_2026');
