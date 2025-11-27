@@ -59,6 +59,11 @@ export default async function handler(req, res) {
 
     // Crea nuovo socio
     const newUser = new User({
+      // META DATI
+      dataRichiesta: new Date(),
+      stato: 'in attesa',
+      tipoSocio: 'ordinario',
+        
       // DATI ANAGRAFICI
       nome,
       cognome,
@@ -82,12 +87,7 @@ export default async function handler(req, res) {
       impegnoNoUsoCommerciale: impegnoNoUsoCommerciale || false,
       accettaSottoposizione: accettaSottoposizione || false,
       accettaDirittiDoveri: accettaDirittiDoveri || false,
-      consensoTrattamentoDati,
-
-      // META-DATI
-      dataRichiesta: new Date(),
-      stato: 'in_attesa',
-      tipoSocio: 'ordinario'
+      consensoTrattamentoDati
     });
 
     await newUser.save();
